@@ -4,7 +4,7 @@ const ForecastBox = ({text, temperature}) => {
   console.log("forecastbox temp:", temperature)
   return (
     <div className="col-sm-3 offset-sm-1" style={styles.forecastBox}>
-      <p> {text} {temperature} </p>
+      <p> {text} {temperature} °C</p>
     </div>
   )
 }

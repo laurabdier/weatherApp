@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 
 const CityList = ({city}) => {
+
   return (
-    <div className="col-sm-11 offset-sm-1" style={styles.placeBox} >
-      <p className="align-text-bottom">{city}</p>
+    <div className=""  >
+      <button type="button" className="col-sm-11 offset-sm-1 align-text-bottom" style={styles.placeBox}>{city}</button>
     </div>
   )
 }

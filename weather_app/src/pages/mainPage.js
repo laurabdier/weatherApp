@@ -3,7 +3,8 @@ import ForecastBox from './../components/forecastBoxes';
 import CityList from './../components/cityList'
 import Sun from './../images/sun.png';
 
-const getForecast = async (city, setInfoCity) => {
+const getForecast = async (city, setInfoCity, setCity) => {
+  setCity(city)
   const url = 'http://api.openweathermap.org/data/2.5/weather?&appid=b0cef5a7c66f966aad14d15ea06dd907&units=metric&lang=fr&q=';
   let response = await fetch(`${url}${city}`)
   let data = await response.json();
@@ -19,7 +20,11 @@ const MainPage = () => {
 
   const handleSubmit = (event) => {
       event.preventDefault();
-      getForecast(city, setInfoCity);
+      getForecast(city, setInfoCity, setCity);
+  }
+
+  const handleClick = (event) => {
+    getForecast(event, setInfoCity, setCity);
   }
 
   return (
@@ -30,7 +35,11 @@ const MainPage = () => {
             <input type="submit" value="Search" className="offset-sm-1 col-sm-5" />
         </form>
         {cityList.map((city, index) => {
-            return <CityList city={city} />
+            return (
+              <div onClick={() => handleClick(city)} >
+                <CityList city={city} />
+              </div>
+            )
           })
         }
       </div>
@@ -44,7 +53,7 @@ const MainPage = () => {
       {infoCity != null ? (
           <div className="row">
               <ForecastBox text="Temp Min:" temperature={infoCity.main.temp_min}/>
-              <ForecastBox text="Ressenti:" temperature={infoCity.main.feels_like}/>
+              <ForecastBox text="Feeling Like:" temperature={infoCity.main.feels_like}/>
               <ForecastBox text="Temp Max:" temperature={infoCity.main.temp_max}/>
           </div>
         ) : null
